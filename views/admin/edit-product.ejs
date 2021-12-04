@@ -1,0 +1,148 @@
+<!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
+<%- include('../includes/head.ejs') %>
+    
+    <link rel="stylesheet" href="/css/auth.css">
+    <link rel="stylesheet" href="/css/loginform.css">
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+
+<% if (errorMessage) { %>
+    <div class="user-message user-message--error"><%= errorMessage %></div>
+<% } %>
+    <div class="lin">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+          <div class="card border-0 shadow rounded-3 my-5">
+            <div class="card-body p-4 p-sm-5">
+              <h5 class="card-title text-center mb-5 fw-light fs-5">Add Or Edit Product</h5>
+              <form action="/admin/<% if (editing) { %>edit-product<% } else { %>add-product<% } %>" method="POST" enctype="multipart/form-data">
+                <div class="form-floating mb-3">
+                    <label for="title">Title</label>
+                <input 
+                    class="<%= validationErrors.find(e => e.param === 'title') ? 'invalid' : '' %>"
+                    type="text" 
+                    name="title" 
+                    id="title" 
+                    value="<% if (editing || hasError) { %><%= product.title %><% } %>">
+                </div>
+
+
+                <div class="form-floating mb-3">
+                  <label for="title">Select Brand</label>
+                  <select name="brand_id" id="brands">
+                    <option value="" selected="" disabled="">Select Brand</option>
+                    <% for (let brand of brandslist) { %>
+                    <option value="<%= brand.id %>"> <%= brand.brand_name %></option>
+                    <% } %>
+                  </select>
+                  <br><br>
+              </div>
+
+
+              <div class="form-floating mb-3">
+                <label for="title">Select Category</label>
+                <select name="category_id" id="categor">
+                  <option value="" selected="" disabled="">Select Category</option>
+                  <% for (let category of categories) { %>
+                  <option value="<%= category.id %>"> <%= category.category_name %></option>
+                  <% } %>
+                </select>
+                <br><br>
+            </div>
+
+
+                <div class="form-floating mb-3">
+                    <label for="image">Image</label>
+                <input 
+                    type="file" 
+                    name="image" 
+                    id="image" 
+                    >
+                </div>
+
+                <div class="form-floating mb-3">
+                  <label for="title">Color</label>
+              <input 
+                  class="<%= validationErrors.find(e => e.param === 'color') ? 'invalid' : '' %>"
+                  type="text" 
+                  name="color" 
+                  id="color" 
+                  value="<% if (editing || hasError) { %><%= product.color %><% } %>">
+              </div>
+
+                <div class="form-floating mb-3">
+                    <label for="selling_price">Selling Price</label>
+                    <input 
+                        class="<%= validationErrors.find(e => e.param === 'selling_price') ? 'invalid' : '' %>"
+                        type="number" 
+                        name="selling_price" 
+                        id="selling price" 
+                        step="0.01" 
+                        value="<% if (editing || hasError) { %><%= product.selling_price %><% } %>">
+                </div>
+
+                <div class="form-floating mb-3">
+                  <label for="discount_price">Discount Price</label>
+                  <input 
+                      class="<%= validationErrors.find(e => e.param === 'discount_price') ? 'invalid' : '' %>"
+                      type="number" 
+                      name="discount_price" 
+                      id="discount price" 
+                      step="0.01" 
+                      value="<% if (editing || hasError) { %><%= product.discount_price %><% } %>">
+              </div>
+
+              <div class="form-floating mb-3">
+                <label for="product_qty">Product Qty</label>
+                <input 
+                    class="<%= validationErrors.find(e => e.param === 'product_qty') ? 'invalid' : '' %>"
+                    type="number" 
+                    name="product_qty" 
+                    id="product_qty" 
+                    step="0.01" 
+                    value="<% if (editing || hasError) { %><%= product.product_qty %><% } %>">
+            </div>
+
+            <div class="form-floating mb-3">
+              <label for="product_code">Product Code</label>
+              <input 
+                  class="<%= validationErrors.find(e => e.param === 'product_code') ? 'invalid' : '' %>"
+                  type="number" 
+                  name="product_code" 
+                  id="product code" 
+                  step="0.01" 
+                  value="<% if (editing || hasError) { %><%= product.product_code %><% } %>">
+          </div>
+               
+
+                <div class="form-floating mb-3">
+                    <label for="description">Description</label>
+                    <textarea 
+                        class="<%= validationErrors.find(e => e.param === 'description') ? 'invalid' : '' %>"
+                        name="description" 
+                        id="description" 
+                        rows="5" value="<% if (editing || hasError) { %><%= prods.description %><% } %>"><% if (editing || hasError) { %><%= product.description %><% } %></textarea>
+                </div>
+
+                <% if (editing) { %>
+                    <input type="hidden" value="<%= product.id %>" name="productId">
+                <% } %>
+  
+                
+                <div class="d-grid">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit"><% if (editing) { %>Update Product<% } else { %>Add Product<% } %></button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+    <%- include('../includes/end.ejs') %>
+  
+  

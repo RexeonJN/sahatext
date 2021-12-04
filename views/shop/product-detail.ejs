@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border border-dark-bottom mb-0">
+            <ul class="navbar-nav mr-auto w-100 p-3 container-fluid">
+
+                <li class="nav-item">
+                   <a href="#" class="text-decoration-none text-dark h6">+919836663137</a> 	
+                    
+                </li>
+
+                <li class="nav-item">
+                   <a href="#" class="text-decoration-none text-dark h6"> Information</a>
+                </li>
+
+                <li class="nav-item col-6 d-flex justify-content-center">
+                   
+                   <a class=" text-decoration-none rounded-circle h6" href="#">Rs</a> 
+                   
+                </li>
+
+                <% if (!isAuthenticated) { %>
+                    <li class="nav-item">
+                        <a href="/login" class="text-decoration-none text-dark h6">Login</a> 
+                     </li>
+
+                     <li class="nav-item">
+                        <a href="/signup" class="text-decoration-none text-dark h6" >Register</a> 
+                     </li>
+
+                    <% } else { %>
+                        <li class="nav-item">
+                            <a href="#" class="text-decoration-none text-dark h6"><%= name %></a>
+                         </li>
+                        <li class="nav-item">
+                            <form action="/logout" method="post">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <button type="submit" class="bg-transparent">Logout</button>
+                            </form>
+                         </li>
+
+                        <% } %>
+
+                <li class="nav-item">
+                  <a href="#"  class="text-decoration-none text-dark h6" >Order History </a> 
+                </li>
+
+                <li class="nav-item">
+                  <a href="#" class="text-decoration-none text-dark h6"  >Wish List</a>  
+                </li>
+            </ul>
+    </nav>
+
+
+     <!-- Second Nav! -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mt-0">
+        
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 container-fluid">
+              <li class="nav-item">
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success ml-md-1" type="submit">Search</button>
+                  </form>
+              </li>
+              <li class="nav-item col-md-6">
+                <a class="nav-link d-flex justify-content-center" href="/products">
+                  <img src="/SAHA-TEXTILE-FINAL-LOGO-400x70.png" class="w-100" alt="" width="400" height="70">
+                </a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 CART
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </li>
+            </ul>
+    </nav>
+
+
+
+
+    <!-- Third Nav! -->
+
+    <nav class="navbar-light bg-light mt-0">
+        <div class="container">
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-link text-body active col-md-1.5" id="home-tab" href="/products" aria-controls="nav-home" aria-selected="false">HOME</a>
+          <a class="nav-link text-body col-md-1.5" id="entire-collection-tab" data-toggle="tab" href="#entire-collection" role="tab" aria-controls="entire-collection" aria-selected="true">	
+            ENTIRE COLLECTION</a>
+          <a class="nav-link text-body text-center col-md-2" id="Saree-tab" data-toggle="tab" href="#Saree" role="tab" aria-controls="Saree" aria-selected="false">SAREE</a>
+          <a class="nav-link text-body text-center col-md-2" id="blouse-tab" data-toggle="tab" href="#nav-blouse" role="tab" aria-controls="nav-blouse" aria-selected="false">BLOUSE</a>
+          <a class="nav-link text-body text-center col-md-2" id="men-tab" data-toggle="tab" href="#nav-men" role="tab" aria-controls="nav-men" aria-selected="false">MEN</a>
+          <a class="nav-link  text-body col-md-1.5" id="home-furnishing-tab" data-toggle="tab" href="#nav-home-furnishing" role="tab" aria-controls="nav-Home-Furnishing" aria-selected="false">HOME FURNISHING</a>
+          <a class="nav-link text-body col-md-1.5" id="jewellery-tab" data-toggle="tab" href="#nav-jewellery" role="tab" aria-controls="nav-Jewellery" aria-selected="false">JEWELLERY</a>
+         
+        </div>
+    </div>
+      </nav>
+      <div class="container-fluid bg-light">
+      <div class="container">
+      <div class="tab-content" id="nav-tabContent">
+
+        <div class="tab-pane fade bg-secondary" id="entire-collection" role="tabpanel" aria-labelledby="entire-collection-tab">
+            <div class="container">
+                <% if (prods.length > 0) { %>
+                <div class="card-deck p-2">
+                    <% for (let brand of prods) { %>
+                    <div class="card text-center">
+                        <div class="text-center">
+                        <img src="/<%= brand.imageUrl %>" class="card-img-top p-3" style="width:195px;height:135px;" alt="<%= brand.title %>">
+                    </div>
+                        <div class="card-body">
+                        <a href="http://127.0.0.1:5500/product_details.html" class="text-decoration-none text-dark h6"><%= brand.title %></a>
+                        <p class="card-text"> This content is a little bit longer.</p>
+                        <% if (!isAuthenticated) { %>
+                            <a href="/login" class="btn btn-dark">Add To Cart</a>
+                            <% } else { %>
+                                
+                                <form action="/cart" method="post">
+                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                    <button class="btn btn-dark" type="submit">Add to Cart</button>
+                                    <input type="hidden" name="productId" value="<%= brand.id %>">
+                                </form>
+
+                                <% } %>
+
+                      </div>
+                    </div>
+                    <% } %>
+                  </div>
+                  <% } else { %>
+                    <h1>No Products Found!</h1>
+                    <% } %>
+        </div>
+        </div>
+
+        <div class="tab-pane fade bg-secondary" id="Saree" role="tabpanel" aria-labelledby="Saree-tab">
+            <div class="container">
+                <div class="row">
+                  <div class="col-md">
+                    
+                    <a href="#" class="text-decoration-none text-white h6">Cotton Saree</a>
+                    <ul class="list-unstyled">
+                        <li> <a href="http://127.0.0.1:5500/filter.html" class="text-decoration-none text-light small">Chanderi</a></li>
+                        <li> <a href="http://127.0.0.1:5500/filter.html" class="text-decoration-none text-light small">Cotton Bomkai</a></li>
+                        <li> <a href="http://127.0.0.1:5500/filter.html" class="text-decoration-none text-light small">Cotton ikkat</a></li>
+                        <li> <a href="http://127.0.0.1:5500/filter.html" class=" class="text-decoration-none text-light small">Handloom Cotton</a></li>
+                        <li> <a href="http://127.0.0.1:5500/filter.html" class="text-decoration-none text-light small">Kalakshetra</a></li>
+                        <li> <a href="http://127.0.0.1:5500/filter.html" class="text-decoration-none text-light small">View More...</a></li>
+                    </ul>
+                
+                  </div>
+                  <div class="col-md">
+                    <a href="http://127.0.0.1:5500/filter.html" class="text-decoration-none text-white h6">Designer Saree</a> 
+                    <ul class="list-unstyled">
+                        <li> <a href="http://127.0.0.1:5500/filter.html" class="text-decoration-none text-light small">Designer(Budget)</a></li>
+                        <li> <a href="http://127.0.0.1:5500/filter.html" class="text-decoration-none text-light small">Silk Exclusive</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="col-md">
+                    <a href="http://127.0.0.1:5500/filter.html" class="text-decoration-none text-white h6">Exclusive Line</a> 
+                  </div>
+                  <div class="col-md-1.5">
+                    <a href="http://127.0.0.1:5500/filter.html" class="text-decoration-none text-white h6">Handloom Exclusive</a> 
+                  </div>
+                  <div class="col-md">
+                    <a href="http://127.0.0.1:5500/filter.html" class="text-decoration-none text-white h6">Jamdani</a> 
+                  </div>
+                  <div class="col-md">
+                    <a href="http://127.0.0.1:5500/filter.html" class="text-decoration-none text-white h6">Linen Saree</a>  
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="col-md">
+                        <a href="http://127.0.0.1:5500/filter.html" class="text-decoration-none text-white h6"> Silk Saries</a> 
+
+                        <ul class="list-unstyled">
+                            <li> <a href="http://127.0.0.1:5500/filter.html" class="text-decoration-none text-light small">Arni Silk</a></li>
+                            <li> <a href="http://127.0.0.1:5500/filter.html" class="text-decoration-none text-light small">Assam Silk</a></li>
+                            <li> <a href="http://127.0.0.1:5500/filter.html" class="text-decoration-none text-light small">Balucuri Silk</a></li>
+                            <li> <a href="http://127.0.0.1:5500/filter.html" class="text-decoration-none text-light small">Bhagalpuri Silk</a></li>
+                            <li> <a href="http://127.0.0.1:5500/filter.html" class="text-decoration-none text-light small">Bomkai Silk</a></li>
+                            <li> <a href="http://127.0.0.1:5500/filter.html" class="text-decoration-none text-light small">View More...</a></li>
+                        </ul> 
+
+                      </div>
+                      <div class="col-md">
+                        <a href="http://127.0.0.1:5500/filter.html" class="text-decoration-none text-white h6"> Wedding Banarasi</a> 
+                      </div>
+                </div>
+              </div>
+        </div>
+
+        <div class="tab-pane fade bg-secondary" id="nav-blouse" role="tabpanel" aria-labelledby="Blouse-tab">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md">
+                        <a href="#" class="text-decoration-none text-white h6">Blouse Pieces</a> 
+                      </div>
+
+                  <div class="col-md">
+                    <a href="#" class="text-decoration-none text-white h6">Blouse Studio</a>
+                    <ul class="list-unstyled">
+                        <li> <a href="#" class="text-decoration-none text-light small">Cotton Printed Blouse-BL159</a></li>
+                        <li> <a href="#" class="text-decoration-none text-light small">Cotton Printed Blouse-BL160</a></li>
+                        <li> <a href="#" class="text-decoration-none text-light small">Cotton Printed Blouse-BL164</a></li>
+                        <li> <a href="#" class="text-decoration-none text-light small">Cotton Printed Blouse-BL169</a></li>
+                        <li> <a href="#" class="text-decoration-none text-light small">Cotton Printed Blouse-BL170</a></li>
+                        <li> <a href="#" class="text-decoration-none text-light small">View More...</a></li>
+                    </ul>
+                  </div>
+                  
+                  <div class="col-md">
+                    <a href="#" class="text-decoration-none text-white h6">Desh</a> 
+                    <ul class="list-unstyled">
+                        <li> <a href="#" class="text-decoration-none text-light small">Desh Kutir Silpo Blouse L102</a></li>
+                        <li> <a href="#" class="text-decoration-none text-light small">Desh Kutir Silpo Blouse L81</a></li>
+                        <li> <a href="#" class="text-decoration-none text-light small">Desh Kutir Silpo Blouse L84</a></li>
+                        <li> <a href="#" class="text-decoration-none text-light small">Desh Kutir Silpo Blouse L88</a></li>
+                        <li> <a href="#" class="text-decoration-none text-light small">Desh Kutir Silpo Blouse L89</a></li>
+                        <li> <a href="#" class="text-decoration-none text-light small">View More...</a></li>
+                    </ul> 
+                  </div>
+                 
+               
+              </div>
+        </div>
+        </div>
+
+        <div class="tab-pane fade bg-secondary" id="nav-men" role="tabpanel" aria-labelledby="Men-tab">
+            <div class="container">
+                <div class="row">
+            
+                    <div class="col-md">
+                        <a href="#" class="text-decoration-none text-white h6 d-block">Bundi Coat</a>
+
+                        <img src="download.jpg" class="d-block w-50 p-3" alt="...">
+                    </div>
+                    <div class="col-md">
+                        <a href="#" class="text-decoration-none text-white h6 d-block">Punjabi & Kurtas</a>
+                        <img src="download.jpg" class="d-block w-50 p-3" alt="...">
+                    </div>
+                    <div class="col-md">
+                        <a href="#" class="text-decoration-none text-white h6 d-block">Shirts</a>
+                        <img src="h-and-m-1586291968.jpeg" class="d-block w-50 p-3" alt="...">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade bg-secondary" id="nav-home-furnishing" role="tabpanel" aria-labelledby="Home-Furnishing-tab">
+            <div class="container">
+                <div class="row">
+            
+                    <div class="col-md">
+                        <a href="#" class="text-decoration-none text-white h6 d-block">Bed Sheet</a>
+                        <img src="h-and-m-1586291968.jpeg" class="d-block w-25 p-3" alt="..." width="200" height="300">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade bg-secondary" id="nav-jewellery" role="tabpanel" aria-labelledby="Jewellery-tab">
+            <div class="container">
+                <% if (categorieslist.length > 0) { %>
+                <div class="card-deck p-2">
+
+                    <% for (let category of categorieslist) { %>
+                    <div class="card text-center">
+                        <div class="text-center">
+                        <img src="/<%= category.imageUrl %>" class="card-img-top p-3" style="width:195px;height:135px;" alt="...">
+                    </div>
+                        <div class="card-body">
+                        <a href="http://127.0.0.1:5500/product_details.html" class="text-decoration-none text-dark h6"><%= category.title %></a>
+                        <p class="card-text"> This content is a little bit longer.</p>
+                        <% if (!isAuthenticated) { %>
+                            <a href="/login" class="btn btn-dark">Add To Cart</a>
+                            <% } else { %>
+                                
+                                <form action="/cart" method="post">
+                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                    <button class="btn btn-dark" type="submit">Add to Cart</button>
+                                    <input type="hidden" name="productId" value="<%= category.id %>">
+                                </form>
+
+                                <% } %>
+                      </div>
+                    </div>
+                    <% } %>
+
+                  </div>
+                  <% } else { %>
+                    <h1>No Products Found!</h1>
+                    <% } %>
+                 
+        </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+   <!-- Main Content! -->
+
+
+   <div class="container py-5">
+    <h4><%= detailedproduct.title %></h4>
+
+    <div class="row">
+        <div class="col">
+
+            <div class="card-deck py-2">
+                <div class="card text-center">
+                    <div class="text-center">
+                    <img src="/<%= detailedproduct.imageUrl %>" class="card-img-top p-2  h-100" alt="<%= detailedproduct.title %>" width="1000px" height="1000px">
+                </div>
+                </div>
+        </div>
+        <h5 class="font-weight-bold">PROBLEM PLACING ORDER??</h6>
+        <p class="font-weight-bold">For International Customers : Please change currency into dollar or euro from the top of website homepage and select paypal payment option </p>
+
+        </div>
+
+        <div class="col">
+
+            <div class="container-fluid bg-light">
+                <h5 class="font-weight-bold">For Customers Outside INDIA</h6>
+                    <p class="font-weight-light">Feel free to contact our helpline: Whatsapp- +91-9836663137 </p>
+            </div>
+
+            <div class="container-fluid bg-light">
+                <h5 class="font-weight-bold">To Order from Outside India</h6>
+                    <p class="font-weight-light">For International Customers : Please change currency into dollar or euro from the top of website homepage and select paypal payment option  </p>
+            </div>
+
+            <div class="container-fluid bg-light">
+                <h6 class="d-inline">Brand:<a href="#" class="text-decoration-none"><%= bofprod.brand_name %></a></h>
+                    <h6 class="float-right d-inline">Views: 281</h>
+                <h6>Product Code: <%= detailedproduct.product_code %></h>
+                <h6>Availability: <%= detailedproduct.status %></h>
+            </div>
+
+            <p class="btn btn-danger disabled d-inline"><s><%= detailedproduct.selling_price %></s></p>
+            <h2 class="font-weight-bold d-inline"><%= detailedproduct.discount_price %></h>
+            <p class="font-weight-light h6 py-3">Ex Tax: <%= detailedproduct.discount_price %></p>
+            <h6 class="font-weight-bold">Check delivery at your pincode</h>
+            <div class="container-fluid bg-light py-2 my-3">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Enter Pin Code" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-dark" type="button" id="button-addon2">Go</button>
+                    </div>
+                  </div>
+            </div>
+
+            <div class="container-fluid bg-light py-2 my-3">
+                <button type="button" class="btn btn-dark d-inline col-md-1 p-2">-</button>
+                <p class="d-inline p-2">0</p>
+
+                <button type="button" class="btn btn-dark d-inline col-md-1 p-2">+</button>
+
+                <button type="button" class="btn btn-dark col-md-6 d-inline float-right">ADD TO CART</button>
+
+            </div>
+            <div class="container-fluid bg-light py-2 my-3">
+                <div class="text-center">
+                    <a href="#" class="text-decoration-none text-dark px-2">Add To Wish List</a>
+                    <a href="#" class="text-decoration-none text-dark  px-2">Compare This Product</a>
+                </div>
+            </div>
+            <div class="container-fluid bg-light py-2 my-3">
+                <a href="#" class="text-decoration-none d-inline">Reviews/</a>
+                <a href="#" class="text-decoration-none d-inline">Write a Review</a>
+            </div>
+            <div class="container-fluid bg-light py-2 my-3">
+                <a href="#" class="text-decoration-none d-inline px-2">FB</a>
+                <a href="#" class="text-decoration-none d-inline px-2">G+</a>
+                <a href="#" class="text-decoration-none d-inline px-2">TWITTER</a>
+            </div>
+    
+
+
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active btn btn-dark" id="Description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">DESCRIPTION</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link btn btn-danger" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="profile" aria-selected="false">Reviews</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="Description-tab">
+            <div class="container py-3">
+                <h5>PRODUCT DESCRIPTION :-</h5>
+            <div class="row py-md-2">
+                <p class="d-inline col-md-2"><%= detailedproduct.title %></p>
+                <p class="d-inline col-6">COLOUR:  <%= detailedproduct.color %></p>
+            </div>
+            <div class="row py-md-2">
+                <p class="d-inline col-md-2">DESCRIPTION</p>
+                <p class="d-inline col-md-6"><%= detailedproduct.description %></p>
+            </div>
+            <div class="row py-md-2">
+                <p class="d-inline col-md-2">BLOUSE PIECE</p>
+                <p class="d-inline col-md-6">RUNNING BLOUSE PIECE IN BLACK</p>
+            </div>
+            <h6>**NOTE: COLOUR MAY SLIGHTLY VARY DUE TO LIGHTING CONDITIONS.</h6>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="container py-3">
+                <h5>Write a review </h5>
+                    <form action="/review" method="post" class="py-3">
+                        <div class="form-group">
+                          <label for="exampleInputName">Your Name</label>
+                          <input type="text" name="name" class="form-control" id="exampleInputName" aria-describedby="nameHelp">
+                         
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Your Review</label>
+                          <textarea class="form-control" name="review" id="reviewTextarea"></textarea>
+                          <button type="button" class="btn btn-danger btn-sm d-inline pr-2 mt-md-2" disabled>Note:</button>
+                          <small id="emailHelp" class="form-text text-muted d-inline">HTML is not translated!</small>
+                        </div>
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <input type="hidden" name="proid" value="<%= pid %>">
+                        <button type="submit" class="btn btn-dark">CONTINUE</button>
+                      </form>
+                      <% if (revie) { %>
+
+                        <% for (let brand of revie) { %>
+
+                            <div class="container-fluid bg-secondary">
+                                <h6><%= brand.comment %></h6>
+                                <p><%= brand.summary %></p>
+                            </div>
+                                
+                           
+
+                            <% } %>
+
+                        <% } else { %>
+<div class="container bg-light"></div>
+
+                            <% } %>
+                     
+            </div>
+            
+           
+        </div>
+      </div>
+</div>
+
+
+<div class="container">
+    <button type="button" class="btn btn-dark btn-sm d-inline" disabled>Tags:</button>
+    <button type="button" class="btn btn-light btn-sm d-inline">Small button</button>
+    <button type="button" class="btn btn-light btn-sm d-inline">Small button</button>
+    <button type="button" class="btn btn-light btn-sm d-inline">Small button</button>
+    <button type="button" class="btn btn-light btn-sm d-inline">Small button</button>
+    <button type="button" class="btn btn-light btn-sm d-inline">Small button</button>
+    <button type="button" class="btn btn-light btn-sm d-inline">Small button</button>
+    <button type="button" class="btn btn-light btn-sm d-inline">Small button</button>
+    <button type="button" class="btn btn-light btn-sm d-inline">Small button</button>
+    <button type="button" class="btn btn-light btn-sm d-inline">Small button</button>
+    <button type="button" class="btn btn-light btn-sm d-inline">Small button</button>
+    <button type="button" class="btn btn-light btn-sm d-inline">Small button</button>
+    <button type="button" class="btn btn-light btn-sm d-inline">Small button</button>
+    <button type="button" class="btn btn-light btn-sm d-inline">Small button</button>
+
+</div>
+
+<div class="container py-3">
+    <h4>Related Products</h4>
+
+    <div class="card-deck p-2">
+
+        <% for (let brand of prods) { %>
+        <div class="card text-center">
+            <div class="text-center">
+            <img src="/<%= brand.imageUrl %>" class="card-img-top p-3" style="width:195px;height:135px;" alt="<%= brand.title %>">
+        </div>
+            <div class="card-body">
+            <a href="/products/<%= brand.id %>" class="text-decoration-none text-dark h6">Product Name</a>
+            <p class="card-text"> This content is a little bit longer.</p>
+            <% if (!isAuthenticated) { %>
+                <a href="/login" class="btn btn-dark">Add To Cart</a>
+                <% } else { %>
+                    
+                    <form action="/cart" method="post">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <button class="btn btn-dark" type="submit">Add to Cart</button>
+                        <input type="hidden" name="productId" value="<%= brand.id %>">
+                    </form>
+
+                    <% } %>
+          </div>
+        </div>
+        <% } %>
+        
+      </div>
+</div>
+
+
+
+
+   <!-- End Main Content! -->
+
+
+
+
+     <!-- Footer! -->
+
+     <div class="container-fluid bg-dark">
+        <div class="container">
+            <div class="row py-md-5">
+                <div class="col-md">
+
+                   <p class="text-light">We Assure Secured Delivery Within Specific Time in India and Worldwide
+                       And Provide Cash On Delivery in Kolkata And Free Shipping Within India</p>
+                </div>
+                <div class="col-md">
+
+                   <p class="text-light">
+                       Mail us for any Suggestions Which will help us to serve you better wecare@sahatextile.com
+                   </p>
+                </div>
+                <div class="col-md">
+
+                   <p class="text-light">
+                       Our Customers are our Asset and we are Happy to serve You..!!
+                   </p>
+                </div>
+                <div class="col-md">
+
+                   <p class="text-light">
+                       We Offer Worldwide Shipping Through Fedex And DHL
+                   </p>
+                </div>
+            </div>
+            <div class="row mt-md-5">
+                <div class="col-md-4">
+                   <ul class="list-unstyled">
+                       <li> <a href="#" class="text-decoration-none text-light small">About Us</a></li>
+                       <li> <a href="#" class="text-decoration-none text-light small">Privacy Policy</a></li>
+                       <li> <a href="#" class="text-decoration-none text-light small">Terms & Conditions</a></li>
+                       <li> <a href="#" class="text-decoration-none text-light small">Return and Refund Policy</a></li>
+                       <li> <a href="#" class="text-decoration-none text-light small">Events</a></li>
+                   </ul> 
+                </div>
+
+                <div class="col-md-4 offset-md-4">
+                   <ul class="list-unstyled">
+                       <li> <a href="#" class="text-decoration-none text-light small">Contact Us</a></li>
+                       <li> <a href="#" class="text-decoration-none text-light small">Returns</a></li>
+                       <li> <a href="#" class="text-decoration-none text-light small">site Map</a></li>
+                   </ul> 
+                </div>
+            </div>
+
+            <div class="row pt-md-3">
+
+               <div class="col">
+                   <a href="#" class="float-right h6">FB</a>
+               </div>
+            </div>
+        </div>
+
+        <div class="container bg-light">
+
+           <div class="row mt-md-3">
+               <div class="col-md">
+
+                   <h6>CERTIFIED BY</h6>
+               </div>
+
+               <div class="col-md">
+
+                   <h6>TOUCH WITH US</h6>
+               </div>
+
+               <div class="col-md">
+                   <h6>SHIPPING PARTNERS</h6>
+
+               </div>
+
+           </div>
+
+        </div>
+       
+
+    </div>
+    <div class="container-fluid bg-light">
+       <p>Copyright © 2017, Saha Textile, All Rights Reserved.</p>
+
+   </div>
+   
+
+
+
+
+   <!-- Optional JavaScript; choose one of the two! -->
+
+   <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+       crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+       integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+       crossorigin="anonymous"></script>
+
+   <!-- Option 2: Separate Popper and Bootstrap JS -->
+   <!--
+   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+   -->
+</body>
+
+</html>

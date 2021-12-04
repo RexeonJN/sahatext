@@ -1,0 +1,25 @@
+ <!-- Background image -->
+ <%- include('../includes/head.ejs') %>
+ <link rel="stylesheet" href="/css/product.css">
+ </head>
+
+ <body>
+     <%- include('../includes/navigation.ejs') %>
+
+<div class="p-5 text-center bg-image" style="
+   background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.jpg');
+   height: 400px;
+ ">
+ <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);">
+   <div class="d-flex justify-content-center align-items-center p-5 h-100">
+     <div class="text-white">
+       <h1 class="mb-3">Shop Easy</h1>
+       <h4 class="mb-3">Keep Shoping & Be Happy</h4>
+       <a class="btn btn-outline-light btn-lg" href="/products" role="button"
+         >Shop Now</a
+       >
+     </div>
+   </div>
+ </div>
+</div>
+<%- include('../includes/end.ejs') %>

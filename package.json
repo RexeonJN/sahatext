@@ -1,0 +1,48 @@
+{
+  "name": "sahatext",
+  "version": "1.0.0",
+  "description": "website for online shopping",
+  "main": "app.js",
+  "engines": {
+    "node": "14.17.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "NODE_ENV=production MONGO_USER=KD MONGO_PASSWORD=bPBm0xQJz5tdOeYs MONGO_DEFAULT_DATABASE=ecomm node app.js",
+    "start-server": "node app.js",
+    "start:dev": "nodemon app.js"
+  },
+  "author": "KD",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "bootstrap-icons": "^1.5.0",
+    "compression": "^1.7.4",
+    "connect-flash": "^0.1.1",
+    "connect-mongodb-session": "^2.4.1",
+    "connect-session-sequelize": "^7.1.2",
+    "csurf": "^1.11.0",
+    "ejs": "^2.7.4",
+    "express": "^4.17.1",
+    "express-handlebars": "^3.0.0",
+    "express-mysql-session": "^2.1.7",
+    "express-session": "^1.17.2",
+    "express-validator": "^5.3.1",
+    "helmet": "^4.6.0",
+    "mongodb": "^3.7.1",
+    "mongoose": "^5.13.9",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.3",
+    "mysql2": "^1.6.1",
+    "nodemailer": "^4.7.0",
+    "nodemailer-sendgrid-transport": "^0.2.0",
+    "pdfkit": "^0.8.3",
+    "pug": "^2.0.3",
+    "sequelize": "^5.0.0-beta.11",
+    "uuid": "^8.3.2"
+  }
+}

@@ -1,0 +1,95 @@
+/* Footer */
+
+
+
+footer{
+	
+	background-size: cover;
+	background-color: rgb(21, 110, 145);
+	margin-top: 0px;
+	
+	bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+	position: static;
+
+}
+
+footer h3{
+	color: #bb1942;
+	font-weight: 500;
+	text-align: center;
+	
+
+}
+
+footer a, i{
+	color: #2b99ac;
+	font-family: 'Roboto';
+	text-align: center;
+}
+footer p{
+	color: rgb(14, 10, 10);
+	text-align: center;
+	
+	
+}
+footer hr{
+	    border-top: 1px solid rgba(210, 90, 90, 0.1);
+	width: 100%;
+}
+footer ul{
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+	padding-bottom: 30px;
+}
+footer li{
+	padding: 5px;
+	margin: 0;
+	text-align: center;
+}
+footer a{
+	padding: 5px;
+	text-transform: capitalize;
+	font-size: 18px;
+	color: rgba(224, 218, 222, 0.438);
+}
+footer a:hover{
+	text-decoration: none;
+	color: rgb(35, 12, 139)
+}
+
+footer .fa{
+	
+	padding-top: 10px;
+	color: rgb(0, 0, 0);
+	font-size: 20px;
+	display: inline-block;
+	text-align: center;
+	display: inline-block;
+	margin: 0 auto;
+}
+footer .download-icon .fa{
+	font-size: 50px;
+	padding: 10px;
+}
+footer .social .fa{
+	padding-top: 30px;
+	font-size: 30px;
+	transition: .9s;
+}
+footer .social .fa:hover{
+	transition: 1s;
+	transform: scale(1.1);
+	color: rgb(94, 27, 133);
+}
+@media(max-width: 768px){
+	footer{
+		height: auto !important;
+	}
+	footer h2{
+		font-size: 30px;
+	}
+}
