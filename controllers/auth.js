@@ -10,11 +10,11 @@ const Brand = require('../models/brand');
 const Category = require('../models/category');
 const Product = require('../models/product');
 
-const transporter = nodemailer.createTransport(
+// const transporter = nodemailer.createTransport(
   sendgridTransport({
     auth: {
       api_key:
-        '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'
+        ''
     }
   })
 );
